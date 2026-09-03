@@ -1,0 +1,16 @@
+allowBuilds:
+  "@parcel/watcher": false
+  "@swc/core": false
+  core-js: false
+  less: false
+  protobufjs: false
+autoInstallPeers: false
+minimumReleaseAge: 0
+packages:
+  - packages/*
+catalog:
+  "@types/node": 26.4.1
+  "@xstools-dev/cli-toolkit": 0.2.0
+  "@xstools-dev/config-ts": 0.1.0
+  typescript: 5.8.3
+  vite-plus: 0.3.0

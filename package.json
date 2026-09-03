@@ -1,0 +1,30 @@
+{
+  "name": "syncat-monorepo",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r --if-present run build",
+    "check": "vp check",
+    "check:fix": "vp check --fix",
+    "changeset-add": "changeset add",
+    "changeset-publish": "pnpm run check-publish && changeset publish",
+    "changeset-version": "changeset version",
+    "check-mono": "sherif",
+    "check-publish": "pnpm run build && pnpm run check && pnpm run test",
+    "clean": "del **/dist **/.build **/.swc **/.malagu **/node_modules !node_modules",
+    "commit": "czg",
+    "dev": "pnpm -r --parallel --if-present run dev",
+    "prepare": "vp hooks enable"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "catalog:",
+    "@changesets/cli": "catalog:",
+    "@types/node": "catalog:",
+    "czg": "catalog:",
+    "del-cli": "catalog:",
+    "sherif": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "packageManager": "pnpm@12.3.1"
+}
