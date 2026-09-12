@@ -1,6 +1,6 @@
 allowBuilds:
-  "@parcel/watcher": false
-  "@swc/core": false
+  '@parcel/watcher': false
+  '@swc/core': false
   core-js: false
   less: false
   protobufjs: false
@@ -9,8 +9,13 @@ minimumReleaseAge: 0
 packages:
   - packages/*
 catalog:
-  "@types/node": 26.4.1
-  "@xstools-dev/cli-toolkit": 0.2.0
-  "@xstools-dev/config-ts": 0.1.0
+  '@changesets/changelog-github': 1.0.0
+  '@types/node': 26.4.1
+  '@xstools-dev/cli-toolkit': 0.3.0
+  '@xstools-dev/config-ts': 0.2.0
+  c12: 3.3.4
+  cac: 7.0.0
+  fast-glob: 3.3.3
   typescript: 5.8.3
-  vite-plus: 0.3.0
+  vite-plus: 0.3.1
+  zod: ^4.6.2

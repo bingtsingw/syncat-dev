@@ -1,0 +1,25 @@
+{
+  "name": "@syncat-dev/strategy",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Built-in synchronization strategies for syncat.",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test --passWithNoTests"
+  },
+  "dependencies": {
+    "@syncat-dev/core": "workspace:*"
+  }
+}

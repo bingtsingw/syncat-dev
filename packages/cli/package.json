@@ -1,0 +1,47 @@
+{
+  "name": "@syncat-dev/cli",
+  "version": "0.0.0",
+  "description": "Synchronize selected files from a source directory to a target directory with configurable strategies.",
+  "keywords": [
+    "file-copy",
+    "file-sync",
+    "strategy",
+    "synchronization"
+  ],
+  "license": "MIT",
+  "bin": {
+    "syncat": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "pretest": "pnpm --filter @syncat-dev/core run build && pnpm --filter @syncat-dev/strategy run build && pnpm run build",
+    "test": "vp test"
+  },
+  "dependencies": {
+    "c12": "catalog:",
+    "cac": "catalog:",
+    "fast-glob": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@syncat-dev/core": "workspace:*",
+    "@syncat-dev/strategy": "workspace:*"
+  },
+  "engines": {
+    "node": ">=24.14.0"
+  }
+}
