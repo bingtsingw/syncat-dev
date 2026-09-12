@@ -6,7 +6,7 @@
   "scripts": {
     "check": "vp check",
     "check-mono": "sherif",
-    "check-publish": "pnpm run check && pnpm run test && pnpm run build",
+    "check-publish": "pnpm run build && pnpm run check && pnpm run test",
     "changeset-publish": "pnpm run check-publish && changeset publish",
     "clean": "del **/dist **/.build **/.swc **/node_modules !node_modules",
     "commit": "czg",
