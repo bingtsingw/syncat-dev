@@ -17,6 +17,7 @@ export type StrategyConfig = CopyStrategy | TextReplaceStrategy;
 
 export interface FileRule {
   path: string;
+  exclude?: string[];
   strategy?: StrategyConfig;
 }
 

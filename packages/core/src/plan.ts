@@ -20,7 +20,7 @@ export async function buildSyncPlan(config: ResolvedSyncatConfig): Promise<SyncP
   const seenPaths = new Set<string>();
 
   for (const rule of config.config.files) {
-    const paths = await resolveRulePaths(config.sourceDir, rule.path);
+    const paths = await resolveRulePaths(config.sourceDir, rule.path, rule.exclude);
     if (paths.length === 0) {
       throw new SyncatError(`File rule matched no source files: ${rule.path}`);
     }
@@ -59,8 +59,8 @@ export async function buildSyncPlan(config: ResolvedSyncatConfig): Promise<SyncP
   return { config, entries, drift: entries.filter((entry) => entry.status !== 'synced') };
 }
 
-async function resolveRulePaths(sourceDir: string, rulePath: string): Promise<string[]> {
-  if (!globSyntax.test(rulePath)) {
+async function resolveRulePaths(sourceDir: string, rulePath: string, exclude: string[] | undefined): Promise<string[]> {
+  if (!globSyntax.test(rulePath) && (!exclude || exclude.length === 0)) {
     return [rulePath];
   }
 
@@ -69,6 +69,7 @@ async function resolveRulePaths(sourceDir: string, rulePath: string): Promise<st
     onlyFiles: true,
     dot: true,
     followSymbolicLinks: false,
+    ignore: exclude,
     unique: true,
   });
 }

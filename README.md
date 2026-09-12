@@ -27,6 +27,7 @@ export default defineConfig({
   source: '~/project/source',
   target: '~/project/target',
   files: [
+    { path: '.vite-hooks/**', exclude: ['.vite-hooks/_/**'] },
     { path: 'features/common/**' },
     {
       path: 'package.json',
@@ -36,7 +37,7 @@ export default defineConfig({
 });
 ```
 
-Each `files[].path` is a relative path or glob applied to both project roots. Paths outside those roots are rejected.
+Each `files[].path` is a relative path or glob applied to both project roots. `exclude` is an optional list of source-relative glob patterns for excluding matches from that rule. Paths outside those roots are rejected.
 
 ## Commands
 

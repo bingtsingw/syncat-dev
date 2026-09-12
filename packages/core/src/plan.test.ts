@@ -50,6 +50,35 @@ describe('sync plan', () => {
       code: 'ENOENT',
     });
   });
+
+  it('excludes matching source paths from an individual rule', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'syncat-core-'));
+    temporaryDirectories.push(root);
+    const sourceDir = join(root, 'source');
+    const targetDir = join(root, 'target');
+    await mkdir(join(sourceDir, '.vite-hooks', '_'), { recursive: true });
+    await mkdir(targetDir, { recursive: true });
+    await writeFile(join(sourceDir, '.vite-hooks', 'pre-commit'), 'pnpm check\n');
+    await writeFile(join(sourceDir, '.vite-hooks', '_', 'commit-msg'), 'internal hook\n');
+
+    const plan = await buildSyncPlan({
+      configFile: join(root, 'syncat.config.ts'),
+      sourceDir,
+      targetDir,
+      config: {
+        source: sourceDir,
+        target: targetDir,
+        files: [{ path: '.vite-hooks/**', exclude: ['.vite-hooks/_/**'] }],
+      },
+    });
+
+    expect(plan.entries.map((entry) => entry.path)).toEqual(['.vite-hooks/pre-commit']);
+    await applySyncPlan(plan, { dryRun: false });
+    expect(await readFile(join(targetDir, '.vite-hooks', 'pre-commit'), 'utf8')).toBe('pnpm check\n');
+    await expect(readFile(join(targetDir, '.vite-hooks', '_', 'commit-msg'), 'utf8')).rejects.toMatchObject({
+      code: 'ENOENT',
+    });
+  });
 });
 
 async function createFixture(input: {
