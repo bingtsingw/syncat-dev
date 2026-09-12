@@ -1,6 +1,6 @@
 {
   "name": "@syncat-dev/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Synchronize selected files from a source directory to a target directory with configurable strategies.",
   "keywords": [
     "file-copy",
