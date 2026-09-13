@@ -26,6 +26,7 @@ import { defineConfig, text } from '@syncat-dev/cli';
 export default defineConfig({
   source: '~/project/source',
   target: '~/project/target',
+  exclude: ['**/.turbo/**', '**/.eslintcache', '**/node_modules/**'],
   files: [
     { path: '.vite-hooks/**', exclude: ['.vite-hooks/_/**'] },
     { path: 'features/common/**' },
@@ -37,7 +38,7 @@ export default defineConfig({
 });
 ```
 
-Each `files[].path` is a relative path or glob applied to both project roots. `exclude` is an optional list of source-relative glob patterns for excluding matches from that rule. Paths outside those roots are rejected.
+`exclude` at the configuration root is an optional list of source-relative glob patterns applied to every file rule. Each `files[].exclude` adds exclusions for that rule only. Paths outside those roots are rejected.
 
 ## Commands
 

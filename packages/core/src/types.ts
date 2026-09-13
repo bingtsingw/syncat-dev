@@ -24,6 +24,7 @@ export interface FileRule {
 export interface SyncatConfig {
   source: string;
   target: string;
+  exclude?: string[];
   files: FileRule[];
 }
 

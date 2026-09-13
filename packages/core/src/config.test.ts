@@ -42,4 +42,18 @@ describe('syncat config', () => {
       ),
     ).toThrow('must not escape its project root');
   });
+
+  it('rejects global exclusion patterns that can escape a project root', () => {
+    expect(() =>
+      resolveSyncatConfig(
+        {
+          source: '../template',
+          target: '../business',
+          exclude: ['../secrets/**'],
+          files: [{ path: 'features/**' }],
+        },
+        '/workspace/config/syncat.config.ts',
+      ),
+    ).toThrow('must not escape its project root');
+  });
 });

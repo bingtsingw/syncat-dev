@@ -26,6 +26,7 @@ export const syncatConfigSchema = z
   .object({
     source: z.string().min(1),
     target: z.string().min(1),
+    exclude: z.array(z.string().min(1)).optional(),
     files: z
       .array(
         z
@@ -53,6 +54,10 @@ export function resolveSyncatConfig(rawConfig: unknown, configFile: string): Res
   const configDir = dirname(configFile);
   const sourceDir = resolveConfigPath(parsed.data.source, configDir);
   const targetDir = resolveConfigPath(parsed.data.target, configDir);
+
+  for (const pattern of parsed.data.exclude ?? []) {
+    assertSafeRulePath(pattern);
+  }
 
   for (const rule of parsed.data.files) {
     assertSafeRulePath(rule.path);

@@ -20,7 +20,8 @@ export async function buildSyncPlan(config: ResolvedSyncatConfig): Promise<SyncP
   const seenPaths = new Set<string>();
 
   for (const rule of config.config.files) {
-    const paths = await resolveRulePaths(config.sourceDir, rule.path, rule.exclude);
+    const exclude = [...(config.config.exclude ?? []), ...(rule.exclude ?? [])];
+    const paths = await resolveRulePaths(config.sourceDir, rule.path, exclude);
     if (paths.length === 0) {
       throw new SyncatError(`File rule matched no source files: ${rule.path}`);
     }
