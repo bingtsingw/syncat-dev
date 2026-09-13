@@ -1,5 +1,11 @@
 # @syncat-dev/cli
 
+## 0.3.0
+
+### Minor Changes
+
+- [`bee8873`](https://github.com/bingtsingw/syncat-dev/commit/bee88735f1d134bfa34a2a9a251339dfbb992820) Thanks [@bingtsingw](https://github.com/bingtsingw)! - Allow root-level exclusion patterns to apply to every file rule.
+
 ## 0.2.0
 
 ### Minor Changes
